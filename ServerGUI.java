@@ -9,7 +9,7 @@ public class ServerGUI extends JFrame implements ActionListener, WindowListener 
 	private JTextArea chat, event; //Text Area for Chat Room + Events
 	private JTextField tPortNumber, makeAnnouncement; //Port Number + Announcement to Make
 	private Server server; //Server Object
-   private String gameName;
+	private String gameName;
 	
    //Starts server on port 10000
 	public static void main(String[] arg) 
