@@ -17,36 +17,36 @@ import javax.imageio.ImageIO;
 public class SignomiGameGUI extends JPanel implements MouseListener, ActionListener
 {
 	public int window_side_length = 880;
-   private JButton card; 
-   private ImageIcon card_background; 
-   private JTextArea chat_message; 
-   private JTextArea type_message;
-   private JButton send;
+	private JButton card; 
+	private ImageIcon card_background; 
+	private JTextArea chat_message; 
+	private JTextArea type_message;
+	private JButton send;
 	public int Clicked_Grid_X, Clicked_Grid_Y;
 	private Client client;   
-   private ChatMessage cm;   
-   public String card_num = "";
-   public String card_info = "";
-   public Ellipse2D.Double red_start_circle,blue_start_circle,yellow_start_circle,green_start_circle;
-   public Ellipse2D.Double red_home_circle,blue_home_circle,yellow_home_circle,green_home_circle;
-   public BufferedImage DrawCardImage = null;
-   private Suits suit;
+	private ChatMessage cm;   
+	public String card_num = "";
+	public String card_info = "";
+	public Ellipse2D.Double red_start_circle,blue_start_circle,yellow_start_circle,green_start_circle;
+	public Ellipse2D.Double red_home_circle,blue_home_circle,yellow_home_circle,green_home_circle;
+	public BufferedImage DrawCardImage = null;
+	private Suits suit;
 
-   public Map<Suits, String> Deck;
+	public Map<Suits, String> Deck;
    
-   public void DrawCard(int type)
-   {           
-      switch(type)
-      {
-         case 0:
-               System.out.println("SIGNOMI - GAME GUI");
-               try 
-               {
+	public void DrawCard(int type)
+	{           
+		switch(type)
+		{
+        	case 0:
+        		System.out.println("SIGNOMI - GAME GUI");
+        		try 
+        		{
                   DrawCardImage = ImageIO.read(new File("SignomiCard.png"));            
                   repaint(); 
-               } 
-               catch (IOException e){}
-               break;
+        		} 
+        		catch (IOException e){}
+        		break;
             case 1:
                System.out.println("ONE - GAME GUI");
                try 
@@ -146,7 +146,7 @@ public class SignomiGameGUI extends JPanel implements MouseListener, ActionListe
    }
 
 	public SignomiGameGUI(String username, String gameName)
-   {
+	{
    
 		JFrame jf = new JFrame();
 		jf.setTitle("Signomi " + " " + gameName + " ");
@@ -202,36 +202,36 @@ public class SignomiGameGUI extends JPanel implements MouseListener, ActionListe
 	}
 
 	void connectionFailed() 
-   {
+	{
       System.out.println("Connection Failed");
 	}
    
 	void append(String str) 
-   {
+	{
 		chat_message.append(str);
 		chat_message.setCaretPosition(chat_message.getText().length() - 1);
-      type_message.setText("");
+		type_message.setText("");
 	}
    
    public void actionPerformed(ActionEvent e) 
    {
-		Object o = e.getSource();
-      if(o == send)
-      {
-         cm = new ChatMessage(1, type_message.getText());
-         client.sendMessage(cm);
-      }
-		if(o == card) 
-      {
-         cm = new ChatMessage(2);
-         client.sendMessage(cm);
-		}      
+	   Object o = e.getSource();
+	   if(o == send)
+	   {
+		   cm = new ChatMessage(1, type_message.getText());
+		   client.sendMessage(cm);
+	   }
+	   if(o == card) 
+	   {
+		   cm = new ChatMessage(2);
+		   client.sendMessage(cm);
+	   }      
 	}
    
    public void paintComponent(Graphics g)
-	{
+   {
 		super.paintComponent(g);
-      Graphics2D g2 = (Graphics2D) g;      
+		Graphics2D g2 = (Graphics2D) g;      
 		g.setColor(Color.black);
 		int grid_side_length = window_side_length/16;
 		
@@ -239,13 +239,13 @@ public class SignomiGameGUI extends JPanel implements MouseListener, ActionListe
 		{
 		   g.drawRect((i*grid_side_length), 0, grid_side_length, grid_side_length);
 			g.drawRect((i*grid_side_length),  (window_side_length-grid_side_length) , grid_side_length, grid_side_length);		
-      }
+		}
       
-      for(int i = 1; i<15; i++)//vertical grid
+		for(int i = 1; i<15; i++)//vertical grid
 		{
 			g.drawRect(0,(i*grid_side_length), grid_side_length, grid_side_length);
 			g.drawRect((window_side_length-grid_side_length) ,(i*grid_side_length),  grid_side_length, grid_side_length);
-      }
+		}
       
       
       g.setFont(new Font("Times New Roman", Font.PLAIN, 25));
@@ -259,17 +259,17 @@ public class SignomiGameGUI extends JPanel implements MouseListener, ActionListe
 			g.drawRect(grid_side_length*2, (i*grid_side_length) , grid_side_length, grid_side_length);
 		}
 		
-		g.fillOval(90, 330, 100, 100);// home
+      g.fillOval(90, 330, 100, 100);// home
 		
-		g.setColor(Color.white);// home
-		g.fillOval(100, 340, 80,80);
+      g.setColor(Color.white);// home
+      g.fillOval(100, 340, 80,80);
       red_home_circle = new Ellipse2D.Double(100,340, 80,80);
       g2.draw(red_home_circle);      
 		
-		g.setColor(Color.red);
-		g.fillPolygon(new int[] {60, 60, 85}, new int[] {10, 45, 27}, 3);
+      g.setColor(Color.red);
+      g.fillPolygon(new int[] {60, 60, 85}, new int[] {10, 45, 27}, 3);
 		
-		g.setColor(Color.red);//"Home" text
+      g.setColor(Color.red);//"Home" text
       g.drawString("Home", 112, 385 );
       
       g.fillOval(210, 55, 80,80);//start
@@ -280,24 +280,24 @@ public class SignomiGameGUI extends JPanel implements MouseListener, ActionListe
       g.drawString("Start", 228, 100 );
       
       //-------------------------------------BLUE--------------------------------------------------------------------------------------------------------------
-		g.setColor(new Color(0,0,255));
+      g.setColor(new Color(0,0,255));
       
       for(int i=1; i<6;i++)// save zone
 		{
-         g.drawRect(grid_side_length*(i+9), (2*grid_side_length), grid_side_length, grid_side_length);
+    	  g.drawRect(grid_side_length*(i+9), (2*grid_side_length), grid_side_length, grid_side_length);
 		}
 		
-		g.fillOval(450, 90, 100, 100);// home
+      g.fillOval(450, 90, 100, 100);// home
 		
-		g.setColor(Color.white);// home
-		g.fillOval(460, 100, 80,80);
+      g.setColor(Color.white);// home
+      g.fillOval(460, 100, 80,80);
       blue_home_circle = new Ellipse2D.Double(460, 100, 80,80);
       g2.draw(blue_home_circle);      
 		
-		g.setColor(new Color(0,0,255));
-		g.fillPolygon(new int[] {870, 835, 852}, new int[] {60, 60, 85}, 3);
+      g.setColor(new Color(0,0,255));
+      g.fillPolygon(new int[] {870, 835, 852}, new int[] {60, 60, 85}, 3);
 		
-		g.drawString("Home", 472, 145 );//"Home" text
+      g.drawString("Home", 472, 145 );//"Home" text
       
       g.fillOval(745, 210, 80,80);//start
       blue_start_circle = new Ellipse2D.Double(745, 210, 80,80);
@@ -308,24 +308,24 @@ public class SignomiGameGUI extends JPanel implements MouseListener, ActionListe
       
       
       //-------------------------------------YELLOW---------------------------------------------------------------------------------------------------------------
-		g.setColor(Color.yellow);
+      g.setColor(Color.yellow);
       
       for(int i=1; i<6;i++)// save zone
-		{
+      {
          g.drawRect(grid_side_length*13, ((i+9)*grid_side_length), grid_side_length, grid_side_length);
-		}
+      }
 		
-		g.fillOval(693, 450, 100, 100);// home
+      g.fillOval(693, 450, 100, 100);// home
 		
-		g.setColor(Color.white);// home
-		g.fillOval(703, 460, 80,80);
+      g.setColor(Color.white);// home
+      g.fillOval(703, 460, 80,80);
       yellow_home_circle = new Ellipse2D.Double(703, 460, 80,80);
       g2.draw(yellow_home_circle);      
 		
-		g.setColor(Color.yellow);
-		g.fillPolygon(new int[] {820, 820, 795}, new int[] {870, 835, 852}, 3);
+      g.setColor(Color.yellow);
+      g.fillPolygon(new int[] {820, 820, 795}, new int[] {870, 835, 852}, 3);
 		
-		g.drawString("Home", 713, 507 );//"Home" text
+      g.drawString("Home", 713, 507 );//"Home" text
       
       g.fillOval(590, 743, 80,80);//start
       yellow_start_circle = new Ellipse2D.Double(590, 743, 80,80);
@@ -336,24 +336,24 @@ public class SignomiGameGUI extends JPanel implements MouseListener, ActionListe
       
       
       //-------------------------------------GREEN----------------------------------------------------------------------------------------------------------------
-		g.setColor(new Color(0,255,0));
+      g.setColor(new Color(0,255,0));
       
       for(int i=1; i<6;i++)// save zone
-		{
+      {
          g.drawRect(grid_side_length*i, 13*grid_side_length, grid_side_length, grid_side_length);
-		}
+      }
 		
-		g.fillOval(330, 690, 100, 100);// home
+      g.fillOval(330, 690, 100, 100);// home
 		
-		g.setColor(Color.white);// home
-		g.fillOval(340, 700, 80,80);
+      g.setColor(Color.white);// home
+      g.fillOval(340, 700, 80,80);
       green_home_circle = new Ellipse2D.Double(340, 700, 80,80);
       g2.draw(green_home_circle);      
 		
-		g.setColor(new Color(0,255,0));
-		g.fillPolygon(new int[] {10, 45, 25}, new int[] {820, 820, 795}, 3);
+      g.setColor(new Color(0,255,0));
+      g.fillPolygon(new int[] {10, 45, 25}, new int[] {820, 820, 795}, 3);
 		
-		g.drawString("Home", 350, 745 );//"Home" text   
+      g.drawString("Home", 350, 745 );//"Home" text   
       
       g.fillOval(55, 595, 80,80);//start
       green_start_circle = new Ellipse2D.Double(55, 595, 80,80);
@@ -380,11 +380,12 @@ public class SignomiGameGUI extends JPanel implements MouseListener, ActionListe
 	}
 
    
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent arg0) 
+	{
 		// TODO Auto-generated method stub
 	
-		arg0.getX();
-      arg0.getY();
+	  arg0.getX();
+	  arg0.getY();
          
       for(int i=0;i<15;i++)
       {
@@ -538,22 +539,18 @@ public class SignomiGameGUI extends JPanel implements MouseListener, ActionListe
 
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
    public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
-		
 	}
 
 }
