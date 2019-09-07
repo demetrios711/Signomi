@@ -1,0 +1,6 @@
+public enum Suits
+{
+   SIGNOMI, ONE, TWO, THREE, FOUR,
+   FIVE, SEVEN, EIGHT, TEN, ELEVEN,
+   TWELVE, BLANK;
+}   
